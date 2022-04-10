@@ -2,8 +2,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Models\Session;
 /*
-|--------------------------------------------------------------------------
+|---------:----------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
@@ -17,20 +18,20 @@ Route::get('/', function () {
     return view('login');
 });
 // Route::get('list', 'Users@list');
-Route::get('list', function(){
-    $user= User::all();
-    return view('userlist', ['user'=>$user]);
-});
+
 Route::get('create', function(){
     return view('create');
 });
+
 Route::post('loginsubmit', function(Request $request){
     // print_r($request->input());
     // return view('loginsubmit');
-    return User::select('*')->where(
+    User::select('*')->where(
         [['email', '=', $request->email],
         ['password', '=', $request->password]]
     )->get();
+    $request->session()->put('logData', [$request->input()]);
+    return redirect('/list');
 });
 Route::post('createsubmit', function(Request $request){
     $user = new User();
@@ -41,6 +42,17 @@ Route::post('createsubmit', function(Request $request){
     $user->github = $request->github;
     $user->twitter = $request->twitter;
     if($user->save()){
+        $request->session()->put('logData', [$request->input()]);
         return redirect('/list');
     }
+});
+    
+Route::group(['middleware' => ['logCheck']], function(){
+    Route::get('list', function(){
+        // return Session()::get('logData');
+        $user= User::all();
+        return view('userlist', ['user'=>$user]);
+    });
+
+
 });
