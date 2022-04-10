@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +24,22 @@ Route::get('create', function(){
     return view('create');
 });
 Route::post('loginsubmit', function(Request $request){
-    print_r($request->input());
+    // print_r($request->input());
     // return view('loginsubmit');
+    return User::select('*')->where(
+        [['email', '=', $request->email],
+        ['password', '=', $request->password]]
+    )->get();
+});
+Route::post('createsubmit', function(Request $request){
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->password = $request->password;
+    $user->linkedin = $request->linkedin;
+    $user->github = $request->github;
+    $user->twitter = $request->twitter;
+    if($user->save()){
+        return redirect('/');
+    }
 });
