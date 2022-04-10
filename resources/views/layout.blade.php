@@ -19,7 +19,7 @@
       @section('header')
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Meetups</a>
+          <a class="navbar-brand" href="/">Meetups</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,10 +27,10 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" href="user">Let's Find</a>
+                <a class="nav-link active" href="list">Let's Find</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="/">Login</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="create">Register</a>
@@ -51,11 +51,11 @@
       @show
     </div>
 
-    <div>
+    <!-- <div>
       @section('footer')
-      <h1>Hello, world!</h1>
+      <h1>Footer</h1>
       @show
-    </div>
+    </div> -->
   </div>
 
 
