@@ -38,6 +38,7 @@ Route::post('createsubmit', function(Request $request){
     $user->name = $request->name;
     $user->email = $request->email;
     $user->password = $request->password;
+    $user->userbio = $request->userbio;
     $user->linkedin = $request->linkedin;
     $user->github = $request->github;
     $user->twitter = $request->twitter;

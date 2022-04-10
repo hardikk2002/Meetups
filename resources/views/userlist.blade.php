@@ -1,13 +1,34 @@
 @extends('layout')
 @section('content')
-<h1>user list page</h1>
+<h2 class="text-center  my-5"><strong> Let's meet and connect 🌈</strong></h2>
 <div>
-  <ul>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
     @foreach ($user as $u)
-    <li><span>{{$u->id}}</span> <span>{{$u->name}}</span> <span>{{$u->email}}</span> <span>{{$u->linkedin}}</span>
-      <span>{{$u->github}}</span> <span>{{$u->twitter}}</span>
-    </li>
+    <div class="col">
+      <div class="card text-center  rounded border-bottom  shadow p-3 mb-5 bg-body rounded">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <p class="card-img mt-4" style="font-size: 2rem"> 👤 </p>
+        <div class="card-body">
+          <h5 class="card-title">{{$u->name}}</h5>
+          <p class="card-text">{{$u->userbio}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a href="http://github.com/{{$u->github}}" class="text-decoration-none"
+              target="_blank">Github</a>
+          </li>
+          <li class="list-group-item"><a href="http://linkedin.com/in/{{$u->linkedin}}" class="text-decoration-none"
+              target="_blank">LinkedIn</a>
+          </li>
+          <li class="list-group-item"><a href="http://twitter.com/{{$u->twitter}}" class="text-decoration-none"
+              target="_blank">Twitter</a>
+          </li>
+        </ul>
+        <div class="card-body">
+          <a class="btn btn-primary" href="mailto:{{$u->email}}">Send Mail</a>
+        </div>
+      </div>
+    </div>
     @endforeach
-  </ul>
+  </div>
 </div>
 @endsection
