@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 // Route::get('list', 'Users@list');
 Route::get('list', function(){
-    return view('userlist');
+    $user= User::all();
+    return view('userlist', ['user'=>$user]);
 });
 Route::get('create', function(){
     return view('create');
@@ -40,6 +41,6 @@ Route::post('createsubmit', function(Request $request){
     $user->github = $request->github;
     $user->twitter = $request->twitter;
     if($user->save()){
-        return redirect('/');
+        return redirect('/list');
     }
 });
