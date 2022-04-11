@@ -42,6 +42,14 @@ Route::post('createsubmit', function(Request $request){
     $user->linkedin = $request->linkedin;
     $user->github = $request->github;
     $user->twitter = $request->twitter;
+    if($request->hasfile('pic')){
+        $file = $request->file('pic');
+        $extension = $file->getClientOriginalExtension();
+        $filename = time().'.'.$extension;
+        $file->move('uploads/', $filename);
+        $user->pic=$filename;
+    }
+    
     if($user->save()){
         $request->session()->put('logData', [$request->input()]);
         return redirect('/list');
